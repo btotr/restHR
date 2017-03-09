@@ -11,7 +11,7 @@ int main()
 	class HeartRateModel hrModel;
 	class SerialView view;
 
-	std::cout << "addlistener\n";
-	hrModel.addListener(0, callback);
-	hrModel.dispatchEvent(0);
+	std::cout << HeartRateModel::listeners::heartRateChange << "addlistener\n";
+	hrModel.addListener(HeartRateModel::heartRateChange, callback);
+	hrModel.dispatchEvent(HeartRateModel::heartRateChange);
 }
