@@ -1,14 +1,12 @@
 #include <vector>
 #include <functional>
-#include <iostream>
-#include <utility>
 
 using namespace std;
 
 class Event {
 	public:
-		 void addListener(std::function<void()> c, int listener);
-		 void dispatchEvent(int listener);
+		 void on(std::function<void()> c, int event);
+		 void emit(int event);
 	protected:
 		vector < pair<function<void()>, int> >  callbacks;
 };

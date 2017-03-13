@@ -1,19 +1,18 @@
 #include "HeartRateModel.h"
 
+enum events { heartRateChange };
 
-enum listeners { heartRateChange };
-
-void HeartRateModel::addListener(int listener, std::function<void()> c) {
-	callbacks.push_back(std::make_pair(c, listener));
+void HeartRateModel::on(int event, std::function<void()> c) {
+	callbacks.push_back(std::make_pair(c, event));
 };
 
-void HeartRateModel::addListener(listeners listener, std::function<void()> c) {
-	callbacks.push_back(std::make_pair(c, static_cast<int>(listener)));
+void HeartRateModel::on(events event, std::function<void()> c) {
+	callbacks.push_back(std::make_pair(c, static_cast<int>(event)));
 };
 
-void HeartRateModel::dispatchEvent(int listener) {
+void HeartRateModel::emit(int event) {
 	for (int i=0; i< callbacks.size(); i++){
-		 if (callbacks[i].second == listener) {
+		 if (callbacks[i].second == event) {
 		 	callbacks[i].first();
 		 }
 	 };

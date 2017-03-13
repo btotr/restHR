@@ -1,7 +1,7 @@
-#include <iostream>
+#include <Arduino.h>
 #include "SerialView.h"
 
 void SerialView::test() 
 {
-	std::cout << "test\n";
+	 Serial.println("Hexxxllo World!");
 }
