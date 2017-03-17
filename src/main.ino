@@ -1,3 +1,4 @@
+#ifndef UNIT_TEST
 #include <Arduino.h>
 #include <SerialView.h>
 #include <HeartRateModel.h>
@@ -8,7 +9,7 @@ class HeartRateModel hrModel;
 void callback() {
 	view.test();
 }
-#ifndef UNIT_TEST
+
 void setup() {
   Serial.begin(9600);
   hrModel.on(HeartRateModel::heartRateChange, callback);
