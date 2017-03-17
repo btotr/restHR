@@ -5,6 +5,7 @@
 
 
 enum events { heartRateChange };
+int blinkPin = 15;                // pin to blink led at each beat
 
 volatile int BPM;                   				// used to hold the pulse rate
 volatile int Signal;                				// holds the incoming raw data
@@ -44,7 +45,7 @@ void pulseSensorInteruptr(){                   	// triggered when flipper fires.
 
   // NOW IT'S TIME TO LOOK FOR THE HEART BEAT
   // signal surges up in value every time there is a pulse
-  if (N > 150){                                 	// avoid high frequency noise
+  if (N > 250){                                 	// avoid high frequency noise
 
     if ( (Signal > thresh) && (Pulse == false) && (N > (IBI/5)*3) ){        
       Pulse = true;                             	// set the Pulse flag when we think there is a pulse
