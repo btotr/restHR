@@ -1,4 +1,4 @@
 class SerialView {
 	public:
-		 void test();
+		 void showBPM(int bpm);
 };

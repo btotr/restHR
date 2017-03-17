@@ -3,8 +3,8 @@
 
 #include "SerialView.h"
 
-void SerialView::test() 
+void SerialView::showBPM(int bpm) 
 {
-	 Serial.println("Hexxxllo World!");
+	 Serial.println(bpm);
 }
 #endif
