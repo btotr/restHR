@@ -17,6 +17,11 @@ void setup() {
 }
 
 void loop() {
-  hrModel.emit(HeartRateModel::heartRateChange);
+      int QS = hrModel.getQS();
+      // view.showQS(QS);
+      if (QS){
+        hrModel.emit(HeartRateModel::heartRateChange);
+      }
+      
 }
 #endif

@@ -1,3 +1,7 @@
+/*
+ info heartRate measurement: https://pulsesensor.com/pages/pulse-sensor-amped-arduino-v1dot1
+*/
+
 #include <Ticker.h>
 #include <SPI.h>
 #include <Wire.h>
@@ -5,7 +9,6 @@
 
 
 enum events { heartRateChange };
-int blinkPin = 15;                // pin to blink led at each beat
 
 volatile int BPM;                   				// used to hold the pulse rate
 volatile int Signal;                				// holds the incoming raw data
@@ -49,7 +52,6 @@ void pulseSensorInteruptr(){                   	// triggered when flipper fires.
 
     if ( (Signal > thresh) && (Pulse == false) && (N > (IBI/5)*3) ){        
       Pulse = true;                             	// set the Pulse flag when we think there is a pulse
-      digitalWrite(blinkPin,HIGH);              	// turn on pin 13 LED
       IBI = sampleCounter - lastBeatTime;       	// measure time between beats in mS
       lastBeatTime = sampleCounter;             	// keep track of time for next pulse
 
@@ -87,7 +89,6 @@ void pulseSensorInteruptr(){                   	// triggered when flipper fires.
   }
 
   if (Signal < thresh && Pulse == true){			// when the values are going down, the beat is over
-    digitalWrite(blinkPin,LOW);      			   // turn off pin 13 LED
     Pulse = false;                      			// reset the Pulse flag so we can do it again
     amp = P - T;                        			// get amplitude of the pulse wave
     thresh = amp/2 + T;                 			// set thresh at 50% of the amplitude
@@ -102,8 +103,8 @@ void pulseSensorInteruptr(){                   	// triggered when flipper fires.
     lastBeatTime = sampleCounter;       			// bring the lastBeatTime up to date        
     firstBeat = true;                   			// set these to avoid noise
     secondBeat = false;                 			// when we get the heartbeat back
-  }			
-			
+  }
+  
   sei();                                			// enable interrupts when youre done!
 }
 
@@ -116,14 +117,20 @@ Ticker flipper;
 
 HeartRateModel::HeartRateModel() {
 	flipper.attach_ms(2, pulseSensorInteruptr);
-	//while(QS) {
-	//	;
-	//}
 	this->emit(this->heartRateChange);
 }
 
 int HeartRateModel::getBPM() {
 	return BPM;
+}
+
+int HeartRateModel::getQS() {
+  int qsInt = 0;
+  if (QS) {
+    qsInt = 1;
+    QS = false;
+  }
+	return qsInt;
 }
 
 

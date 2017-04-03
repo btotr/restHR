@@ -9,5 +9,6 @@ class HeartRateModel : Event {
 		void on(events event, std::function<void()> c);
 		void emit(int event);
 		int getBPM();
+		int getQS();
 		
 };

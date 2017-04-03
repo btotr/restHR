@@ -7,4 +7,9 @@ void SerialView::showBPM(int bpm)
 {
 	 Serial.println(bpm);
 }
+
+void SerialView::showQS(int QS) 
+{
+	 Serial.println(QS);
+}
 #endif
