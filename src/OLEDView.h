@@ -1,6 +1,5 @@
 #include "AbstractView.h"
-
-class SerialView : AbstractView {
+class OLEDView : AbstractView{
 	public:
 		void init();
 		void showBPM(int bpm);

@@ -1,10 +1,10 @@
 #ifndef UNIT_TEST
 #include <Arduino.h>
-#include <Ticker.h>
-#include <SerialView.h>
+#include <OLEDView.h>
 #include <HeartRateModel.h>
 
-class SerialView view;
+
+class OLEDView view;
 class HeartRateModel hrModel;
 
 void callback() {
@@ -12,16 +12,14 @@ void callback() {
 }
 
 void setup() {
-  Serial.begin(9600);
+  view.init();
   hrModel.on(HeartRateModel::heartRateChange, callback);
 }
 
 void loop() {
       int QS = hrModel.getQS();
-      // view.showQS(QS);
       if (QS){
         hrModel.emit(HeartRateModel::heartRateChange);
       }
-      
 }
 #endif
