@@ -1,5 +1,1 @@
-# start agent with
-
-```
-platformio remote agent start
-```
+I needed a way to measure my heart rate each morning, just when you get awake. This information is useful to decide whether you get sick or had an hard training and need to take it easy. I didn't want to ware a gadget  at night and use a device such as a Garmin watch is tedious. Instead I would like a well design (photo is a prototype) thing that just hangs on the wall. In the morning I put my finger in it and it send the value (rest heart rate) to some service.
